@@ -1,14 +1,18 @@
 # EmailTest 项目配置指南
 
+> **当前版本：v2.0** — 新增防刷频率限制
+
 ## 项目结构
 
 ```
 emailTest/
 ├── api/          # NestJS 后端 (端口 30001)
 │   └── src/
+│       ├── app.module.ts            # 主模块（含频率限制配置）
 │       └── mail/
-│           ├── mail.service.ts   # 邮件发送逻辑
-│           └── mail.module.ts    # 邮件模块
+│           ├── mail.service.ts      # 邮件发送逻辑
+│           ├── mail.controller.ts   # 邮件接口
+│           └── mail.module.ts       # 邮件模块
 ├── web/          # Vue3 前端 (端口 5173)
 │   └── src/
 │       └── components/
@@ -144,7 +148,37 @@ pnpm run dev      # 启动前端，监听 5173 端口
 
 ---
 
-## 五、常见问题
+## 五、防刷频率限制（v2.0 新增）
+
+为防止恶意刷邮件，已集成 `@nestjs/throttler` 实现频率限制。
+
+### 配置规则
+
+| 参数 | 值 | 说明 |
+|------|-----|------|
+| 时间窗口 | 60 秒 | 统计时间范围 |
+| 请求上限 | 3 次 | 时间窗口内最多允许请求次数 |
+
+### 超限表现
+
+- 超过限制的请求会返回 `429 Too Many Requests`
+- 前端应给出"操作过于频繁"的提示
+
+### 调整方式
+
+修改 `api/src/app.module.ts` 中的 ThrottlerModule 配置：
+
+```typescript
+ThrottlerModule.forRoot([{
+  name: 'short',
+  ttl: 60000,   // 时间窗口（毫秒）
+  limit: 3,     // 最大请求次数
+}]),
+```
+
+---
+
+## 六、常见问题
 
 ### 邮件发送成功但收件箱没有收到
 
@@ -162,7 +196,7 @@ pnpm run dev      # 启动前端，监听 5173 端口
 
 ---
 
-## 六、相关文件路径汇总
+## 七、相关文件路径汇总
 
 | 用途 | 文件路径 |
 |------|----------|
