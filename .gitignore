@@ -1,0 +1,68 @@
+# ==========================================
+# api/ 目录
+# ==========================================
+api/dist
+api/node_modules
+api/build
+api/logs
+api/*.log
+api/npm-debug.log*
+api/pnpm-debug.log*
+api/yarn-debug.log*
+api/yarn-error.log*
+api/lerna-debug.log*
+api/coverage
+api/.nyc_output
+api/.idea
+api/.project
+api/.classpath
+api/.c9/
+api/*.launch
+api/.settings/
+api/*.sublime-workspace
+api/.vscode/*
+!api/.vscode/settings.json
+!api/.vscode/tasks.json
+!api/.vscode/launch.json
+!api/.vscode/extensions.json
+api/.env
+api/.env.development.local
+api/.env.test.local
+api/.env.production.local
+api/.env.local
+api/.temp
+api/.tmp
+api/pids
+api/*.pid
+api/*.seed
+api/*.pid.lock
+api/report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# ==========================================
+# web/ 目录
+# ==========================================
+web/logs
+web/*.log
+web/npm-debug.log*
+web/yarn-debug.log*
+web/yarn-error.log*
+web/pnpm-debug.log*
+web/lerna-debug.log*
+web/node_modules
+web/dist
+web/dist-ssr
+web/*.local
+web/.vscode/*
+!web/.vscode/extensions.json
+web/.idea
+web/.DS_Store
+web/*.suo
+web/*.ntvs*
+web/*.njsproj
+web/*.sln
+web/*.sw?
+
+# ==========================================
+# 根目录通用
+# ==========================================
+.DS_Store
